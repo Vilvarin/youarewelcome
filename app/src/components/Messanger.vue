@@ -8,7 +8,7 @@
 
     <div class="messages">
       <message v-for="message in messages"
-               :author="message.author"
+               :authorID="message.authorID"
                :content="message.content">
       </message>
     </div>
@@ -18,12 +18,13 @@
                 id="chat-input"
                 class="chat-input"
                 autofocus
-                placeholder="Напишите сообщение...">
+                placeholder="Напишите сообщение..."
+                v-model="tempContent">
       </textarea>
 
       <button type="button"
               class="send-button"
-              v-on:click="submitMessage">
+              @click="submitMessage">
         <i class="send-icon"></i>
       </button>
     </div>
@@ -39,26 +40,32 @@ export default {
   data () {
     return {
       messages: [
-        {author: 'Vi', content: 'Сообщение 1'}
-      ]
-    }
-  },
+        { authorID: 1, content: 'Сообщение 1' },
+        { authorID: 0, content: 'Сообщение 2' },
+        { authorID: 1, content: 'Сообщение 3' }
+      ],
 
-  components: {
-    Message
+      tempContent: ''
+    }
   },
 
   methods: {
     submitMessage (e) {
       this.addMessage({
-        author: 'Vi',
-        content: 'Сообщение'
+        authorID: 0,
+        content: this.tempContent
       })
+
+      this.tempContent = ''
     },
 
     addMessage (message) {
       this.messages.push(message)
     }
+  },
+
+  components: {
+    Message
   }
 }
 </script>
