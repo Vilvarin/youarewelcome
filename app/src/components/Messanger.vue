@@ -7,15 +7,41 @@
       </div>
 
       <div class="buttons">
-        <button class="settings-button">
-          <i class="settings-icon"></i>
+        <!-- <button type="button"
+                class="history-button"
+                @click="openTimeButton">
+          <i class="history-icon"></i>История
+        </button> -->
+
+        <button type="button"
+                class="search-button"
+                @click="searchPanelIsOpen = !searchPanelIsOpen">
+          <i class="search-icon"></i>Поиск
         </button>
+
+        <!-- <button type="button" class="settings-button">
+          <i class="settings-icon"></i>Настройки
+        </button> -->
+
+        <!-- markdown -->
+        <!-- localeStorage -->
+        <!-- редактирование -->
+        <!-- удаление -->
       </div>
     </div>
 
+    <search-form :isOpen="searchPanelIsOpen"
+                 @input="findMessages"
+                 @close="searchPanelIsOpen = !searchPanelIsOpen">
+    </search-form>
+
     <div class="messages">
       <message v-for="message in messages"
-               :message="message">
+               :authorID="message.authorID"
+               :content="message.content"
+               :creation-time="message.creationTime"
+               :error="message.error"
+               :hidden="message.hidden">
       </message>
 
       <div class="writes" v-show="writes">Вам пишут</div>
@@ -28,6 +54,7 @@
 <script>
 import Message from './Message'
 import SendForm from './Send-form'
+import SearchForm from './Search-form'
 import api from '../api'
 
 export default {
@@ -36,8 +63,8 @@ export default {
   data () {
     return {
       messages: [],
-
-      writes: false
+      writes: false,
+      searchPanelIsOpen: false
     }
   },
 
@@ -76,15 +103,38 @@ export default {
            this.addMessage({
              authorID: 0,
              content: 'Ошибка сервера, сообщение не доставлено',
-             error: true
+             error: 'Ошибка сервера, сообщение не доставлено'
            })
          })
+    },
+
+    findMessages (text) {
+      if (text) {
+        this.messages = this.messages.map(message => {
+          let position = message.content.indexOf(text)
+
+          if (position === -1) {
+            message.hidden = true
+          } else {
+            message.hidden = false
+          }
+
+          return message
+        })
+      } else {
+        this.messages = this.messages.map(message => {
+          message.hidden = false
+
+          return message
+        })
+      }
     }
   },
 
   components: {
     Message,
-    SendForm
+    SendForm,
+    SearchForm
   }
 }
 </script>
@@ -98,6 +148,20 @@ export default {
 .top-panel {
   height: 60px;
   background-color: #fff;
+
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+.user-info {
+  float: left;
+}
+
+.buttons {
+  float: right;
 }
 
 .messages {

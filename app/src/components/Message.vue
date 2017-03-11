@@ -1,6 +1,7 @@
 <template>
   <div :class="{ 'from-me': fromMe, 'error': error }"
-       class="message">
+       class="message"
+       v-show="!hidden">
     <div class="content">{{ content }}</div>
 
     <div class="info">
@@ -17,15 +18,29 @@ export default {
   name: 'message',
 
   props: {
-    message: Object
-  },
+    authorID: {
+      type: Number,
+      default () { return 0 }
+    },
 
-  data () {
-    return {
-      authorID: this.message.authorID || 0,
-      content: this.message.content || '',
-      creationTime: this.message.creationTime || new Date(),
-      error: this.message.error || false
+    content: {
+      type: String,
+      default () { return '' }
+    },
+
+    creationTime: {
+      type: Date,
+      default () { return new Date() }
+    },
+
+    error: {
+      type: String,
+      default () { return '' }
+    },
+
+    hidden: {
+      type: Boolean,
+      default () { return false }
     }
   },
 
