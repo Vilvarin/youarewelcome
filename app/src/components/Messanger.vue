@@ -1,9 +1,16 @@
 <template>
   <div class="messanger">
     <div class="top-panel">
-      <button class="settings-button">
-        <i class="settings-icon"></i>
-      </button>
+      <div class="user-info">
+        <div class="avatar"><img src="../assets/img/favicon.png" alt="аватарка"></div>
+        <div class="name">Огненный Шушпанчик</div>
+      </div>
+
+      <div class="buttons">
+        <button class="settings-button">
+          <i class="settings-icon"></i>
+        </button>
+      </div>
     </div>
 
     <div class="messages">
