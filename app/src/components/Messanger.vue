@@ -10,6 +10,8 @@
       <message v-for="message in messages"
                :message="message">
       </message>
+
+      <div class="writes" v-show="writes">Вам пишут</div>
     </div>
 
     <send-form @submitMessage="submitMessageHandler"></send-form>
@@ -26,7 +28,9 @@ export default {
 
   data () {
     return {
-      messages: []
+      messages: [],
+
+      writes: false
     }
   },
 
@@ -41,8 +45,12 @@ export default {
     },
 
     getAnswer (message) {
+      this.writes = true
+
       api.getAnswer(message.content)
          .then(answer => {
+           this.writes = false
+
            if (answer.ok) {
              this.addMessage({
                authorID: 1,
@@ -53,6 +61,8 @@ export default {
            }
          })
          .catch(() => {
+           this.writes = false
+
            this.addMessage({
              authorID: 0,
              content: 'Ошибка сервера, сообщение не доставлено',

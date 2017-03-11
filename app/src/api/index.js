@@ -1,5 +1,29 @@
 const url = '/api/'
 
+function createSleepPromise (timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
+
+function sleep (timeout) {
+  let promiseFunction = value => {
+    return createSleepPromise(timeout).then(() => {
+      return value
+    })
+  }
+
+  promiseFunction.then = () => {
+    let sleepPromise = createSleepPromise(timeout)
+
+    return sleepPromise.then.apply(sleepPromise, arguments)
+  }
+
+  promiseFunction.catch = Promise.resolve().catch
+
+  return promiseFunction
+}
+
 function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -28,6 +52,7 @@ export default {
       },
       body: transformRequest({q: request})
     })
+    .then(sleep(1500))
     .then(checkStatus)
     .then(response => response.json())
   }
