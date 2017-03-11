@@ -37,7 +37,10 @@ export default {
   methods: {
     submitMessageHandler (message) {
       this.addMessage(message)
-      this.getAnswer(message)
+
+      if (!this.writes) {
+        this.getAnswer(message)
+      }
     },
 
     addMessage (message) {
