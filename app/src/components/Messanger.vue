@@ -8,38 +8,57 @@
 
     <div class="messages">
       <message v-for="message in messages"
-               :authorID="message.authorID"
-               :content="message.content"
-               :creationTime="message.creationTime">
+               :message="message">
       </message>
     </div>
 
-    <send-form @submitMessage="addMessage"></send-form>
+    <send-form @submitMessage="submitMessageHandler"></send-form>
   </div>
 </template>
 
 <script>
 import Message from './Message'
 import SendForm from './Send-form'
+import api from '../api'
 
 export default {
   name: 'messanger',
 
   data () {
     return {
-      messages: [
-        { authorID: 1, content: 'Сообщение 1' },
-        { authorID: 0, content: 'Сообщение 2' },
-        { authorID: 1, content: 'Сообщение 3' }
-      ],
-
-      tempContent: ''
+      messages: []
     }
   },
 
   methods: {
+    submitMessageHandler (message) {
+      this.addMessage(message)
+      this.getAnswer(message)
+    },
+
     addMessage (message) {
       this.messages.push(message)
+    },
+
+    getAnswer (message) {
+      api.getAnswer(message.content)
+         .then(answer => {
+           if (answer.ok) {
+             this.addMessage({
+               authorID: 1,
+               content: answer.a
+             })
+           } else {
+             throw new Error(answer.error)
+           }
+         })
+         .catch(() => {
+           this.addMessage({
+             authorID: 0,
+             content: 'Ошибка сервера, сообщение не доставлено',
+             error: true
+           })
+         })
     }
   },
 

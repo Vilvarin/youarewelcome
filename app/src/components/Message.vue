@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'from-me': fromMe }"
+  <div :class="{ 'from-me': fromMe, 'error': error }"
        class="message">
     <div class="content">{{ content }}</div>
 
@@ -17,11 +17,15 @@ export default {
   name: 'message',
 
   props: {
-    authorID: Number,
-    content: String,
-    creationTime: {
-      type: Date,
-      default () { return new Date() }
+    message: Object
+  },
+
+  data () {
+    return {
+      authorID: this.message.authorID || 0,
+      content: this.message.content || '',
+      creationTime: this.message.creationTime || new Date(),
+      error: this.message.error || false
     }
   },
 
@@ -55,6 +59,10 @@ export default {
   &.from-me {
     margin-right: 10px;
     margin-left: 50px;
+  }
+
+  &.error {
+    background-color: #a33;
   }
 }
 
