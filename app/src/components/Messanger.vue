@@ -9,30 +9,18 @@
     <div class="messages">
       <message v-for="message in messages"
                :authorID="message.authorID"
-               :content="message.content">
+               :content="message.content"
+               :creationTime="message.creationTime">
       </message>
     </div>
 
-    <div class="send-form">
-      <textarea name="chat-input"
-                id="chat-input"
-                class="chat-input"
-                autofocus
-                placeholder="Напишите сообщение..."
-                v-model="tempContent">
-      </textarea>
-
-      <button type="button"
-              class="send-button"
-              @click="submitMessage">
-        <i class="send-icon"></i>
-      </button>
-    </div>
+    <send-form @submitMessage="addMessage"></send-form>
   </div>
 </template>
 
 <script>
 import Message from './Message'
+import SendForm from './Send-form'
 
 export default {
   name: 'messanger',
@@ -50,29 +38,19 @@ export default {
   },
 
   methods: {
-    submitMessage (e) {
-      this.addMessage({
-        authorID: 0,
-        content: this.tempContent
-      })
-
-      this.tempContent = ''
-    },
-
     addMessage (message) {
       this.messages.push(message)
     }
   },
 
   components: {
-    Message
+    Message,
+    SendForm
   }
 }
 </script>
 
 <style scoped lang="scss">
-$send-button-size: 20px;
-
 .messanger {
   margin: 0 auto;
   max-width: 600px;
@@ -85,27 +63,7 @@ $send-button-size: 20px;
 
 .messages {
   min-height: 600px;
-  background-color: #333;
+  background-color: #ccc;
   padding: 10px;
-}
-
-.send-form {
-  display: flex;
-  align-items: center;
-
-  height: 60px;
-  background-color: #fff;
-}
-
-.chat-input {
-  height: 100%;
-  padding: 10px;
-  resize: none;
-  width: calc(100% - #{$send-button-size});
-}
-
-.send-button {
-  width: $send-button-size;
-  height: 100%;
 }
 </style>

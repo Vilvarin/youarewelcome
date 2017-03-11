@@ -20,25 +20,23 @@ export default {
     authorID: Number,
     content: String,
     creationTime: {
-      type: Function,
+      type: Date,
       default () { return new Date() }
     }
   },
 
   computed: {
     time () {
-      const now = moment()
-      const time = moment(this.creationTime)
-
-      if (now.isBefore(time, 'day')) {
-        return time.fromNow()
-      } else {
-        return time.format('H:mm')
-      }
+      return moment(this.creationTime).calendar(null, {
+        sameDay: 'H:mm',
+        lastDay: '[Вчера] H:mm',
+        lastWeek: 'dddd, H:mm',
+        sameElse: 'MMMM'
+      })
     },
 
     fromMe () {
-      return !!this.authorID
+      return !this.authorID
     }
   }
 }
@@ -47,11 +45,20 @@ export default {
 <style lang="scss">
 .message {
   background-color: #fff;
-  margin: 20px 0;
+  margin: 20px 60px 20px 10px;
   padding: 10px;
 
   &:first-child {
-    margin: 0;
+    margin-top: 0;
   }
+
+  &.from-me {
+    margin-right: 10px;
+    margin-left: 50px;
+  }
+}
+
+.info {
+  text-align: right;
 }
 </style>
