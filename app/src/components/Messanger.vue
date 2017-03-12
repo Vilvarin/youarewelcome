@@ -111,6 +111,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/styles/variables.scss';
+
 .messanger {
   margin: 0 auto;
   width: 320px;
@@ -120,9 +122,9 @@ export default {
 
 .messages {
   height: 400px;
-  overflow-y: scroll;
   overflow-x: hidden;
-  background-color: var(--background-color);
+  overflow-y: scroll;
+  background-color: $pale-gray-color;
   padding: 10px;
 }
 </style>

@@ -72,18 +72,32 @@ export default {
 
 <style lang="scss">
 .top-panel {
-  height: 60px;
-  background-color: var(--background-color);
+  display: flex;
+  justify-content: space-around;
 
-  &:after {
-    content: '';
-    clear: both;
-    display: table;
-  }
+  height: 60px;
 }
 
 .user-info {
-  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  position: relative;
+  display: inline-block;
+
+  background-color: #fff;
+
+  border-radius: 500px;
+  width: 40px;
+  height: 40px;
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .buttons {

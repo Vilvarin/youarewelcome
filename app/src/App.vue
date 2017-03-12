@@ -34,6 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
+// Fonts
 @import url('https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i');
 
 @font-face {
@@ -46,9 +47,13 @@ export default {
   font-style: normal;
 }
 
+// Includes
 @import '../node_modules/reset.css/reset.css';
-@import './assets/styles/global.scss';
 @import './assets/styles/icons.scss';
+</style>
+
+<style lang="scss">
+@import './assets/styles/global.scss';
 </style>
 
 <style scoped lang="scss">
