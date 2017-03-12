@@ -11,6 +11,14 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-size: 2.4rem;
+
+  &.tiny    { font-size: 1.6rem; }
+  &.small   { font-size: 2.0rem; }
+  &.medium  { font-size: 2.4rem; }
+  &.large   { font-size: 2.8rem; }
+  &.massive { font-size: 3.2rem; }
 }
 
 .pen-icon:before {

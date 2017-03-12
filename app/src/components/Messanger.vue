@@ -118,12 +118,15 @@ export default {
   width: 320px;
   background-color: #fff;
   float: left;
+  overflow: hidden;
+
+  box-shadow: 0 0 25px -4px;
 }
 
 .messages {
   height: 400px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: $pale-gray-color;
   padding: 10px;
 }

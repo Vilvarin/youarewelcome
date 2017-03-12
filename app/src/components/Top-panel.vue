@@ -7,25 +7,27 @@
 
     <div class="search-form" :class="{'open': searchFormIsOpen}">
       <input type="text" name="search"
+             class="search-input"
+             placeholder="Искать..."
              @input="updateSearchForm"
              v-model="searchInput">
 
       <button type="button" class="reset-button" @click="resetSearchForm">
-        <i class="reset-icon"></i>Очистить
+        <i class="close-icon"></i>
       </button>
     </div>
 
     <div class="buttons">
-      <!-- <button type="button"
+      <button type="button"
               class="history-button"
-              @click="openTimeButton">
-        <i class="history-icon"></i>История
-      </button> -->
+              >
+        <i class="massive history-icon"></i>
+      </button>
 
       <button type="button"
               class="search-button"
               @click="toggleSearchForm">
-        <i class="search-icon"></i>Поиск
+        <i class="massive search-icon"></i>
       </button>
     </div>
   </div>
@@ -71,16 +73,25 @@ export default {
 </script>
 
 <style lang="scss">
+$top-panel-height: 60px;
+
 .top-panel {
+  position: relative;
   display: flex;
   justify-content: space-around;
+  overflow: hidden;
 
-  height: 60px;
+  height: $top-panel-height;
 }
 
 .user-info {
   display: flex;
   align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: stretch;
 }
 
 .avatar {
@@ -100,18 +111,29 @@ export default {
   }
 }
 
-.buttons {
-  float: right;
-}
-
 .search-form {
   position: absolute;
   overflow: hidden;
-  height: 0;
-  transition: height .3s;
+  width: 100%;
+  height: $top-panel-height;
+  transform: translateY(-#{$top-panel-height});
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fff;
+
+  transition: transform .3s;
 
   &.open {
-    height: 30px;
+    transform: translateY(0);
   }
+}
+
+.search-input {
+  flex: 1;
+  padding: 0 5px;
+  margin: 0 10px;
 }
 </style>

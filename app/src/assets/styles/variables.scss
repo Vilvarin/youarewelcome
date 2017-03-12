@@ -22,13 +22,13 @@ $dark-gray-color:  hsl(0, 0%, 40%);
 /***********
     Font
 ***********/
-$base-font-size: 16rem;
+$base-font-size: 1.6rem;
 
-$tiny-font-size: $base-font-size - 4rem;
-$small-font-size: $base-font-size - 2rem;
+$tiny-font-size: $base-font-size - .4rem;
+$small-font-size: $base-font-size - .2rem;
 $medium-font-size: $base-font-size;
-$large-font-size: $base-font-size + 2rem;
-$massive-font-size: $base-font-size + 4rem;
+$large-font-size: $base-font-size + .2rem;
+$massive-font-size: $base-font-size + .4rem;
 
 $font-color: lighten(black, 15);
 $inverted-font-color: invert($font-color);
