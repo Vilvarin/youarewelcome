@@ -3,6 +3,8 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
+var isProduction = process.env.NODE_ENV === 'production'
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -61,6 +63,38 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'css-loader',
+        options: {
+          minimize: isProduction,
+          sourceMap: isProduction
+            ? config.build.productionSourceMap
+            : config.dev.cssSourceMap,
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: isProduction,
+              sourceMap: isProduction
+                ? config.build.productionSourceMap
+                : config.dev.cssSourceMap,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isProduction
+                ? config.build.productionSourceMap
+                : config.dev.cssSourceMap,
+            }
+          }
+        ]
       }
     ]
   }

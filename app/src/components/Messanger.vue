@@ -1,39 +1,8 @@
 <template>
   <div class="messanger">
-    <div class="top-panel">
-      <div class="user-info">
-        <div class="avatar"><img src="../assets/img/favicon.png" alt="аватарка"></div>
-        <div class="name">Огненный Шушпанчик</div>
-      </div>
-
-      <div class="buttons">
-        <!-- <button type="button"
-                class="history-button"
-                @click="openTimeButton">
-          <i class="history-icon"></i>История
-        </button> -->
-
-        <button type="button"
-                class="search-button"
-                @click="searchPanelIsOpen = !searchPanelIsOpen">
-          <i class="search-icon"></i>Поиск
-        </button>
-
-        <!-- <button type="button" class="settings-button">
-          <i class="settings-icon"></i>Настройки
-        </button> -->
-
-        <!-- markdown -->
-        <!-- localeStorage -->
-        <!-- редактирование -->
-        <!-- удаление -->
-      </div>
-    </div>
-
-    <search-form :isOpen="searchPanelIsOpen"
-                 @input="findMessages"
-                 @close="searchPanelIsOpen = !searchPanelIsOpen">
-    </search-form>
+    <top-panel :companion="companion"
+               @search="findMessages">
+    </top-panel>
 
     <div class="messages">
       <message v-for="message in messages"
@@ -54,8 +23,10 @@
 <script>
 import Message from './Message'
 import SendForm from './Send-form'
-import SearchForm from './Search-form'
+import TopPanel from './Top-panel'
+
 import api from '../api'
+import avatar from '../assets/img/favicon.png'
 
 export default {
   name: 'messanger',
@@ -63,8 +34,8 @@ export default {
   data () {
     return {
       messages: [],
-      writes: false,
-      searchPanelIsOpen: false
+      companion: { avatar, name: 'Огненный шушпанчик' },
+      writes: false
     }
   },
 
@@ -134,7 +105,7 @@ export default {
   components: {
     Message,
     SendForm,
-    SearchForm
+    TopPanel
   }
 }
 </script>
@@ -142,31 +113,16 @@ export default {
 <style scoped lang="scss">
 .messanger {
   margin: 0 auto;
-  max-width: 600px;
-}
-
-.top-panel {
-  height: 60px;
+  width: 320px;
   background-color: #fff;
-
-  &:after {
-    content: '';
-    clear: both;
-    display: table;
-  }
-}
-
-.user-info {
   float: left;
 }
 
-.buttons {
-  float: right;
-}
-
 .messages {
-  min-height: 600px;
-  background-color: #ccc;
+  height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: var(--background-color);
   padding: 10px;
 }
 </style>
