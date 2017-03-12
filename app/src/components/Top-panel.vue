@@ -114,14 +114,13 @@ $top-panel-height: 60px;
   background-color: #fff;
 
   border-radius: 500px;
-  width: 40px;
-  height: 40px;
 
   padding-right: 10px;
 
   img {
     display: block;
-    max-width: 100%;
+    width: 40px;
+    height: 40px;
     height: auto;
   }
 }

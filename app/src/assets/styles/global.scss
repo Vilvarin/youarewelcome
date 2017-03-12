@@ -100,6 +100,7 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  font-family: 'Lora', serif;
   height: 20px;
   font-size: $medium-font-size;
   padding: 6px 5px;
@@ -116,6 +117,9 @@ select {
 textarea {
   padding-top: 6px;
   padding-bottom: 6px;
+  box-sizing: content-box;
+  height: auto;
+  border-bottom: none;
 }
 
 /************

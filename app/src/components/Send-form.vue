@@ -11,7 +11,7 @@
     <button type="button"
             class="send-button"
             @click="submitMessage">
-      <i class="send-icon"></i>
+      <i class="massive submit-icon"></i>
     </button>
   </div>
 </template>
@@ -41,25 +41,26 @@ export default {
 </script>
 
 <style lang="scss">
-$send-button-size: 20px;
-
 .send-form {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  overflow: hidden;
 
-  height: 60px;
+  height: 78px;
   background-color: #fff;
+
+  box-shadow: 0 0 10px 0;
 }
 
 .chat-input {
-  height: 100%;
+  flex: 1;
   padding: 10px;
   resize: none;
-  width: calc(100% - #{$send-button-size});
 }
 
 .send-button {
-  width: $send-button-size;
+  flex: 0;
   height: 100%;
+  padding: 0;
 }
 </style>
