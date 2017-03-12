@@ -77,8 +77,13 @@ input[type="button"] {
 
   transition: all .1s;
 
-  &:hover, &:focus {
-    color: $dark-gray-color;
+  &:focus {
+    color: $light-gray-color;
+    outline: 0;
+  }
+
+  &:hover {
+    color: $gray-color;
     outline: 0;
   }
 }

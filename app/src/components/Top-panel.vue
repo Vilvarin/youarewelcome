@@ -20,7 +20,8 @@
     <div class="buttons">
       <button type="button"
               class="history-button"
-              >
+              :class="{ active: historyButtonIsActive }"
+              @click="toggleHistory">
         <i class="massive history-icon"></i>
       </button>
 
@@ -46,6 +47,7 @@ export default {
   data () {
     return {
       searchFormIsOpen: false,
+      historyButtonIsActive: false,
       searchInput: ''
     }
   },
@@ -67,12 +69,19 @@ export default {
       this.searchInput = ''
       this.forceUpdateSearchForm()
       this.toggleSearchForm()
+    },
+
+    toggleHistory () {
+      this.historyButtonIsActive = !this.historyButtonIsActive
+      this.$emit('toggleHistory')
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../assets/styles/variables.scss';
+
 $top-panel-height: 60px;
 
 .top-panel {
@@ -82,11 +91,14 @@ $top-panel-height: 60px;
   overflow: hidden;
 
   height: $top-panel-height;
+
+  box-shadow: 0 0 10px 0;
 }
 
 .user-info {
   display: flex;
   align-items: center;
+  padding: 0 10px;
 }
 
 .buttons {
@@ -97,6 +109,7 @@ $top-panel-height: 60px;
 .avatar {
   position: relative;
   display: inline-block;
+  flex: 0 0 40px;
 
   background-color: #fff;
 
@@ -104,11 +117,20 @@ $top-panel-height: 60px;
   width: 40px;
   height: 40px;
 
+  padding-right: 10px;
+
   img {
     display: block;
     max-width: 100%;
     height: auto;
   }
+}
+
+.name {
+  flex: 1 0 150px;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .search-form {
@@ -135,5 +157,9 @@ $top-panel-height: 60px;
   flex: 1;
   padding: 0 5px;
   margin: 0 10px;
+}
+
+.active.history-button {
+  color: $dark-gray-color;
 }
 </style>
