@@ -1,7 +1,8 @@
 <template>
   <div class="messanger">
     <top-panel :companion="companion"
-               @search="findMessages">
+               @search="findMessages"
+               @toggleHistory="toggleHistoryHandler">
     </top-panel>
 
     <div class="messages">
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import Message from './Message'
 import SendForm from './Send-form'
 import TopPanel from './Top-panel'
@@ -33,7 +36,10 @@ export default {
 
   data () {
     return {
-      messages: [],
+      messages: [
+        {authorID: 0, content: 'Старое сообщение', creationTime: new Date(2010)},
+        {authorID: 0, content: 'Ещё одно старое сообщение', creationTime: new Date(2010)}
+      ],
       companion: { avatar, name: 'Огненный шушпанчик' },
       writes: false
     }
@@ -97,6 +103,19 @@ export default {
           return message
         })
       }
+    },
+
+    toggleHistoryHandler () {
+      this.messages = this.messages.map(message => {
+        let today = moment().format('YYYY.MM.DD')
+        let messageDay = moment(message.creationTime).format('YYYY.MM.DD')
+
+        if (messageDay !== today) {
+          message.hidden = !message.hidden
+        }
+
+        return message
+      })
     }
   },
 
