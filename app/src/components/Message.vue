@@ -107,6 +107,7 @@ $bg-color: #fff;
 
   &.error {
     background-color: $primary-dark-color;
+    color: $inverted-font-color;
   }
 
   &error:after {
@@ -123,7 +124,7 @@ $bg-color: #fff;
 }
 
 .error-icon {
-  color: #fff;
+  color: $inverted-font-color;
   vertical-align: middle;
 }
 </style>

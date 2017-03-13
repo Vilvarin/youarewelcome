@@ -110,6 +110,7 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/styles/variables.scss';
+@import '../assets/styles/mixins.scss';
 
 .messanger {
   margin: 0 auto;
@@ -122,6 +123,8 @@ export default {
 }
 
 .messages {
+  @include scrollbar();
+
   height: 400px;
   overflow-x: hidden;
   overflow-y: auto;

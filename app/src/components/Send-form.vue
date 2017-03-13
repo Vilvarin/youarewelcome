@@ -41,6 +41,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/mixins.scss';
+
 .send-form {
   display: flex;
   align-items: stretch;
@@ -53,6 +55,8 @@ export default {
 }
 
 .chat-input {
+  @include scrollbar();
+
   flex: 1;
   padding: 10px;
   resize: none;
