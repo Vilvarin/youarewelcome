@@ -69,11 +69,13 @@ export default {
       this.searchInput = ''
       this.forceUpdateSearchForm()
       this.toggleSearchForm()
+
+      this.historyButtonIsActive = false
     },
 
     toggleHistory () {
       this.historyButtonIsActive = !this.historyButtonIsActive
-      this.$emit('toggleHistory')
+      this.$emit('toggleHistory', this.historyButtonIsActive)
     }
   }
 }

@@ -6,12 +6,14 @@
     </top-panel>
 
     <div class="messages">
-      <message v-for="message in messages"
+      <message v-for="message in messages" :key="message.id"
+               :id="message.id"
                :authorID="message.authorID"
                :content="message.content"
                :creation-time="message.creationTime"
                :error="message.error"
-               :hidden="message.hidden">
+               :hidden="message.hidden"
+               @delete="deleteMessage">
       </message>
 
       <div class="writes" v-show="writes">Вам пишут</div>
@@ -36,10 +38,25 @@ export default {
 
   data () {
     return {
+      messageID: 1,
+
       messages: [
-        {authorID: 0, content: 'Старое сообщение', creationTime: new Date(2010)},
-        {authorID: 0, content: 'Ещё одно старое сообщение', creationTime: new Date(2010)}
+        {
+          id: 0,
+          authorID: 0,
+          content: 'Старое сообщение',
+          creationTime: new Date(2010),
+          hidden: true
+        },
+        {
+          id: 1,
+          authorID: 0,
+          content: 'Ещё одно старое сообщение',
+          creationTime: new Date(2010),
+          hidden: true
+        }
       ],
+
       companion: { avatar, name: 'Огненный шушпанчик' },
       writes: false
     }
@@ -55,7 +72,20 @@ export default {
     },
 
     addMessage (message) {
+      this.messageID++
+      message.id = this.messageID
+
       this.messages.push(message)
+    },
+
+    deleteMessage (id) {
+      for (let i = 0; i < this.messages.length; i++) {
+        if (this.messages[i]['id'] === id) {
+          this.messages.splice(i, 1)
+
+          break
+        }
+      }
     },
 
     getAnswer (message) {
@@ -102,16 +132,18 @@ export default {
 
           return message
         })
+
+        this.toggleHistoryHandler(false)
       }
     },
 
-    toggleHistoryHandler () {
+    toggleHistoryHandler (state) {
       this.messages = this.messages.map(message => {
         let today = moment().format('YYYY.MM.DD')
         let messageDay = moment(message.creationTime).format('YYYY.MM.DD')
 
         if (messageDay !== today) {
-          message.hidden = !message.hidden
+          message.hidden = !state
         }
 
         return message

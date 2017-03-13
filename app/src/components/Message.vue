@@ -2,6 +2,8 @@
   <div :class="{ 'from-me': fromMe, 'error': error }"
        class="message"
        v-show="!hidden">
+    <div class="delete" @click="onDelete"><i class="tiny close-icon"></i></div>
+
     <div class="content">{{ content }}</div>
 
     <div class="info">
@@ -19,6 +21,11 @@ export default {
   name: 'message',
 
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
+
     authorID: {
       type: Number,
       default () { return 0 }
@@ -57,6 +64,12 @@ export default {
 
     fromMe () {
       return !this.authorID
+    }
+  },
+
+  methods: {
+    onDelete () {
+      this.$emit('delete', this.id)
     }
   }
 }
@@ -118,6 +131,31 @@ $bg-color: #fff;
   &.error:after {
     border-bottom-color: $primary-dark-color;
   }
+}
+
+.message:hover {
+  .delete { opacity: 1; }
+}
+
+.delete {
+  position: absolute;
+  right: 0; top: 0;
+  margin: 0 2px;
+
+  opacity: 0;
+  color: $primary-sat-color;
+
+  transition: all .2s;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-dark-color;
+  }
+}
+
+.message.error .delete {
+  color: $inverted-font-color;
+  &:hover { color: black; }
 }
 
 .info {
