@@ -16,7 +16,9 @@
                @delete="deleteMessage">
       </message>
 
-      <div class="writes" v-show="writes">Вам пишут</div>
+      <transition name="fade">
+        <div class="writes" v-show="writes">Вам пишут...<i class="tiny pen-icon"></i></div>
+      </transition>
     </div>
 
     <send-form @submitMessage="submitMessageHandler"></send-form>
@@ -207,10 +209,25 @@ export default {
 .messages {
   @include scrollbar();
 
+  position: relative;
   height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: $pale-gray-color;
   padding: 10px;
+}
+
+.writes {
+  position: absolute;
+  left: 0; bottom: 0;
+  color: $dark-gray-color;
+  padding-left: 10px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active для <2.1.8 */ {
+  opacity: 0
 }
 </style>
