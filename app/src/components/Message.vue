@@ -71,8 +71,11 @@ $bg-color: #fff;
   position: relative;
 
   background-color: $bg-color;
-  margin: 20px 60px 20px 10px;
+  margin: 20px 30px 20px 5px;
   padding: 10px;
+
+  border-radius: -5px 5px 0 5px;
+  box-shadow: -5px 0 16px 0 rgba(0, 0, 0, .5);
 
   &:after {
     content: '';
@@ -80,13 +83,13 @@ $bg-color: #fff;
     background-color: transparent;
 
     border: 10px solid transparent;
-    border-right: 10px solid $bg-color;
+    border-bottom: 6px solid $bg-color;
 
     width: 0;
     height: 0;
-    left: -20px;
+    left: -10px;
     right: auto;
-    bottom: 12px;
+    bottom: 0;
   }
 
   &:first-child {
@@ -94,13 +97,14 @@ $bg-color: #fff;
   }
 
   &.from-me {
-    margin-right: 10px;
-    margin-left: 50px;
+    margin-right: 5px;
+    margin-left: 30px;
+    border-radius: 5px 5px 0 5px;
 
     &:after {
       border: 10px solid transparent;
-      border-left: 10px solid $bg-color;
-      right: -20px;
+      border-bottom: 6px solid $bg-color;
+      right: -10px;
       left: auto;
     }
   }
@@ -108,14 +112,11 @@ $bg-color: #fff;
   &.error {
     background-color: $primary-dark-color;
     color: $inverted-font-color;
+    padding: 8px;
   }
 
-  &error:after {
-    border-right-color: $primary-dark-color;
-  }
-
-  &.error.from-me:after {
-    border-left-color: $primary-dark-color;
+  &.error:after {
+    border-bottom-color: $primary-dark-color;
   }
 }
 
