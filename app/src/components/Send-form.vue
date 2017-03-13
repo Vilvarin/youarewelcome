@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '../assets/styles/mixins.scss';
 
 .send-form {

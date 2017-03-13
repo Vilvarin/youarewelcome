@@ -3,21 +3,36 @@
     <messanger></messanger>
 
     <div class="info">
-      <div class="palette">
-        <div class="first block"></div>
-        <div class="second block"></div>
-        <div class="third block"></div>
-        <!-- <div class="fourth block"></div> -->
-        <div class="five block"></div>
-        <div class="six block"></div>
-      </div>
+      <p>
+        В приложении реализованы следующие фичи:
+        <ul>
+          <li>Поиск в тексте сообщений</li>
+          <li>Возможность скрыть\показать историю сообщений</li>
+          <li>Вывод даты сообщения</li>
+          <li>Возможность удалить сообщение из истории</li>
+          <li>Эмуляция задержки сервера в 1.5 секунды.</li>
+          <li>Обработка ошибок в случае проблем с сервером или его отсутствия</li>
+          <li>История сохраняется в localStorage</li>
+        </ul>
+        ...остальное не реализовано.<br />
+        Для примера добавлено несколько тестовых сообщений.
+      </p>
 
-      <div class="pallete">
-        <div class="first gray block"></div>
-        <div class="second gray block"></div>
-        <div class="third gray block"></div>
-        <div class="fourth gray block"></div>
-      </div>
+      <p>
+        При реализации использовались следующие сторонние библиотеки и ресурсы:
+        <ul>
+          <li>стандартный сборщик на webpack из vuejs-templates репозитория</li>
+          <li><strong>lodash.debounce</strong> - для устранения проблем при вводе в поля формы</li>
+          <li><strong>moment.js</strong> - для простого вывода и обработки дат</li>
+          <li><strong>reset.css</strong> - сброс css стилей</li>
+          <li><strong>Material icons</strong> - иконки</li>
+          <li><strong>Lora</strong> - шрифт с google fonts</li>
+        </ul>
+      </p>
+
+      <p>
+        <strong>Спасибо за внимание!</strong>
+      </p>
     </div>
   </div>
 </template>
@@ -67,58 +82,6 @@ export default {
 .info {
   float: left;
   padding-left: 100px;
-}
-
-.palette {
-  @include clearfix;
-}
-
-.block {
-  color: $font-color;
-
-  width: 50px;
-  height: 50px;
-
-  float: left;
-}
-
-.first.block {
-  background-color: $primary-dark-color;
-}
-
-.second.block {
-  background-color: $primary-sat-color;
-}
-
-.third.block {
-  background-color: $primary-color;
-}
-
-.fourth.block {
-  background-color: $secondary-color;
-}
-
-.five.block {
-  background-color: $secondary-sat-color;
-}
-
-.six.block {
-  background-color: $secondary-dark-color;
-}
-
-.first.gray.block {
-  background-color: $pale-gray-color;
-}
-
-.second.gray.block {
-  background-color: $light-gray-color;
-}
-
-.third.gray.block {
-  background-color: $gray-color;
-}
-
-.fourth.gray.block {
-  background-color: $dark-gray-color;
+  text-align: left;
 }
 </style>

@@ -73,6 +73,14 @@ export default {
             hidden: true
           },
           {
+            id: 2,
+            authorID: 1,
+            content: 'Шушпанчик что-то ответил',
+            creationTime: new Date(2017, 2, 18),
+            hidden: true,
+            error: true
+          },
+          {
             id: 3,
             authorID: 1,
             content: 'Новое сообщение от шушпанчика'
