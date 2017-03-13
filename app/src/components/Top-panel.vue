@@ -1,5 +1,5 @@
 <template>
-  <div class="top-panel">
+  <div class="top-panel" @keyup.esc="resetSearchForm">
     <div class="user-info">
       <div class="avatar"><img :src="companion.avatar" alt="аватарка"></div>
       <div class="name">{{ companion.name }}</div>
@@ -12,7 +12,8 @@
              @input="updateSearchForm"
              v-model="searchInput">
 
-      <button type="button" class="reset-button" @click="resetSearchForm">
+      <button type="button" class="reset-button"
+              @click="resetSearchForm">
         <i class="close-icon"></i>
       </button>
     </div>
@@ -66,11 +67,13 @@ export default {
     },
 
     resetSearchForm () {
-      this.searchInput = ''
-      this.forceUpdateSearchForm()
-      this.toggleSearchForm()
+      if (this.searchFormIsOpen) {
+        this.searchInput = ''
+        this.forceUpdateSearchForm()
+        this.toggleSearchForm()
 
-      this.historyButtonIsActive = false
+        this.historyButtonIsActive = false
+      }
     },
 
     toggleHistory () {

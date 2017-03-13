@@ -1,5 +1,5 @@
 <template>
-  <div class="send-form">
+  <div class="send-form" @keyup.ctrl.enter="submitMessage">
     <textarea name="chat-input"
               id="chat-input"
               class="chat-input"
