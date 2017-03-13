@@ -88,6 +88,7 @@ $top-panel-height: 60px;
 
 .top-panel {
   position: relative;
+  z-index: 5;
   display: flex;
   justify-content: space-around;
   overflow: hidden;
@@ -130,6 +131,7 @@ $top-panel-height: 60px;
 .name {
   flex: 1 0 150px;
   max-height: 50px;
+  max-width: 160px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

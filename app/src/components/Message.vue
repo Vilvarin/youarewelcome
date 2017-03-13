@@ -87,8 +87,8 @@ $bg-color: #fff;
   margin: 20px 30px 20px 5px;
   padding: 10px;
 
-  border-radius: -5px 5px 0 5px;
-  box-shadow: -5px 0 16px 0 rgba(0, 0, 0, .5);
+  border-radius: 5px 5px 5px 0;
+  box-shadow: 5px 0 16px 0 rgba(0, 0, 0, .5);
 
   &:after {
     content: '';
@@ -113,6 +113,7 @@ $bg-color: #fff;
     margin-right: 5px;
     margin-left: 30px;
     border-radius: 5px 5px 0 5px;
+    box-shadow: -5px 0 16px 0 rgba(0, 0, 0, .5);
 
     &:after {
       border: 10px solid transparent;

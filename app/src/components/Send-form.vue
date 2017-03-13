@@ -44,6 +44,8 @@ export default {
 @import '../assets/styles/mixins.scss';
 
 .send-form {
+  position: relative;
+  z-index: 5;
   display: flex;
   align-items: stretch;
   overflow: hidden;
