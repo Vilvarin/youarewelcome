@@ -45,15 +45,27 @@ export default {
           id: 0,
           authorID: 0,
           content: 'Старое сообщение',
-          creationTime: new Date(2010),
+          creationTime: new Date(2017, 1, 12),
           hidden: true
         },
         {
           id: 1,
           authorID: 0,
           content: 'Ещё одно старое сообщение',
-          creationTime: new Date(2010),
+          creationTime: new Date(2017, 1, 13),
           hidden: true
+        },
+        {
+          id: 2,
+          authorID: 1,
+          content: 'Шушпанчик что-то ответил',
+          creationTime: new Date(2017, 2, 18),
+          hidden: true
+        },
+        {
+          id: 3,
+          authorID: 1,
+          content: 'Новое сообщение от шушпанчика'
         }
       ],
 

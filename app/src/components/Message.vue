@@ -56,9 +56,9 @@ export default {
     time () {
       return moment(this.creationTime).calendar(null, {
         sameDay: 'H:mm',
-        lastDay: '[Вчера] H:mm',
+        lastDay: '[Вчера,] H:mm',
         lastWeek: 'dddd, H:mm',
-        sameElse: 'MMMM'
+        sameElse: 'DD/MM/YYYY'
       })
     },
 
@@ -160,6 +160,8 @@ $bg-color: #fff;
 
 .info {
   text-align: right;
+  color: $gray-color;
+  font-size: $small-font-size;
 }
 
 .error-icon {
