@@ -48,7 +48,7 @@ export default {
       return storeData
     } else {
       return {
-        messageID: 1,
+        messageID: 4,
 
         messages: [
           {
@@ -73,15 +73,15 @@ export default {
             hidden: true
           },
           {
-            id: 2,
-            authorID: 1,
-            content: 'Шушпанчик что-то ответил',
+            id: 3,
+            authorID: 0,
+            content: 'Это сообщение не доставлено',
             creationTime: new Date(2017, 2, 18),
             hidden: true,
             error: true
           },
           {
-            id: 3,
+            id: 4,
             authorID: 1,
             content: 'Новое сообщение от шушпанчика'
           }
@@ -147,7 +147,8 @@ export default {
     findMessages (text) {
       if (text) {
         this.messages = this.messages.map(message => {
-          let position = message.content.indexOf(text)
+          let position = message.content.toLowerCase()
+            .indexOf(text.toLowerCase())
 
           if (position === -1) {
             message.hidden = true
