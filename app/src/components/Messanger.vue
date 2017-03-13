@@ -37,40 +37,49 @@ export default {
   name: 'messanger',
 
   data () {
-    return {
-      messageID: 1,
+    let storeData = localStorage.getItem('messangerData')
 
-      messages: [
-        {
-          id: 0,
-          authorID: 0,
-          content: 'Старое сообщение',
-          creationTime: new Date(2017, 1, 12),
-          hidden: true
-        },
-        {
-          id: 1,
-          authorID: 0,
-          content: 'Ещё одно старое сообщение',
-          creationTime: new Date(2017, 1, 13),
-          hidden: true
-        },
-        {
-          id: 2,
-          authorID: 1,
-          content: 'Шушпанчик что-то ответил',
-          creationTime: new Date(2017, 2, 18),
-          hidden: true
-        },
-        {
-          id: 3,
-          authorID: 1,
-          content: 'Новое сообщение от шушпанчика'
-        }
-      ],
+    if (storeData) {
+      storeData = JSON.parse(storeData)
+      storeData.writes = false
 
-      companion: { avatar, name: 'Огненный шушпанчик' },
-      writes: false
+      return storeData
+    } else {
+      return {
+        messageID: 1,
+
+        messages: [
+          {
+            id: 0,
+            authorID: 0,
+            content: 'Старое сообщение',
+            creationTime: new Date(2017, 1, 12),
+            hidden: true
+          },
+          {
+            id: 1,
+            authorID: 0,
+            content: 'Ещё одно старое сообщение',
+            creationTime: new Date(2017, 1, 13),
+            hidden: true
+          },
+          {
+            id: 2,
+            authorID: 1,
+            content: 'Шушпанчик что-то ответил',
+            creationTime: new Date(2017, 2, 18),
+            hidden: true
+          },
+          {
+            id: 3,
+            authorID: 1,
+            content: 'Новое сообщение от шушпанчика'
+          }
+        ],
+
+        companion: { avatar, name: 'Огненный шушпанчик' },
+        writes: false
+      }
     }
   },
 
@@ -160,6 +169,16 @@ export default {
 
         return message
       })
+    }
+  },
+
+  watch: {
+    messages (newMessages) {
+      localStorage.setItem('messangerData', JSON.stringify({
+        messageID: this.messageID,
+        messages: newMessages,
+        companion: this.companion
+      }))
     }
   },
 
