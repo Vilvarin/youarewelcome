@@ -5,7 +5,8 @@
     <div class="content">{{ content }}</div>
 
     <div class="info">
-      <span class="date">{{ time }}</span>
+      <i class="error-icon" v-show="error"></i>
+      <span class="date" v-show="!error">{{ time }}</span>
     </div>
   </div>
 </template>
@@ -34,8 +35,8 @@ export default {
     },
 
     error: {
-      type: String,
-      default () { return '' }
+      type: Boolean,
+      default () { return false }
     },
 
     hidden: {
@@ -62,10 +63,31 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/variables.scss';
+
+$bg-color: #fff;
+
 .message {
-  background-color: #fff;
+  position: relative;
+
+  background-color: $bg-color;
   margin: 20px 60px 20px 10px;
   padding: 10px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+
+    border: 10px solid transparent;
+    border-right: 10px solid $bg-color;
+
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    bottom: 12px;
+  }
 
   &:first-child {
     margin-top: 0;
@@ -74,14 +96,34 @@ export default {
   &.from-me {
     margin-right: 10px;
     margin-left: 50px;
+
+    &:after {
+      border: 10px solid transparent;
+      border-left: 10px solid $bg-color;
+      right: -20px;
+      left: auto;
+    }
   }
 
   &.error {
-    background-color: #a33;
+    background-color: $primary-dark-color;
+  }
+
+  &error:after {
+    border-right-color: $primary-dark-color;
+  }
+
+  &.error.from-me:after {
+    border-left-color: $primary-dark-color;
   }
 }
 
 .info {
   text-align: right;
+}
+
+.error-icon {
+  color: #fff;
+  vertical-align: middle;
 }
 </style>

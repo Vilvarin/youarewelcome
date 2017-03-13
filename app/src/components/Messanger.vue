@@ -71,11 +71,9 @@ export default {
          .catch(() => {
            this.writes = false
 
-           this.addMessage({
-             authorID: 0,
-             content: 'Ошибка сервера, сообщение не доставлено',
-             error: 'Ошибка сервера, сообщение не доставлено'
-           })
+           let lastMessage = this.messages.pop()
+           lastMessage.error = true
+           this.addMessage(lastMessage)
          })
     },
 
